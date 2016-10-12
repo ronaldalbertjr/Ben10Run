@@ -6,11 +6,9 @@ public class PlayerScript : MonoBehaviour
 	private Rigidbody rb;
 	private Animator anim;
 	[SerializeField] private float Axisz,Axisy,Speed;
-	[SerializeField] private Animation anima;
     private bool animCheck;
 	void Start ()
 	{
-		rb = GetComponent<Rigidbody> ();
 		anim = GetComponent<Animator> ();
 		Speed = 1;
 		Axisy = 180;
@@ -64,12 +62,12 @@ public class PlayerScript : MonoBehaviour
     }
     void UpdateRotation()
     {
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.D))
         {
             transform.rotation = Quaternion.AngleAxis(Axisy, transform.up);
             Axisy += Speed;
         }
-        if (Input.GetKey(KeyCode.LeftArrow))
+        else if (Input.GetKey(KeyCode.A))
         {
             transform.rotation = Quaternion.AngleAxis(Axisy, transform.up);
             Axisy -= Speed;

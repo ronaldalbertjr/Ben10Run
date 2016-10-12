@@ -1,0 +1,169 @@
+fileFormatVersion: 2
+guid: 64e88505720d065419dfc4103f6c5e7f
+timeCreated: 1476311898
+licenseType: Free
+ModelImporter:
+  serializedVersion: 18
+  fileIDToRecycleName:
+    100000: Camera
+    100002: DrawCall_100_001
+    100004: DrawCall_104_001
+    100006: DrawCall_20_001
+    100008: DrawCall_20_002
+    100010: DrawCall_21
+    100012: DrawCall_215_001
+    100014: DrawCall_21_002
+    100016: DrawCall_27
+    100018: DrawCall_28_001
+    100020: DrawCall_32_001
+    100022: DrawCall_33_005
+    100024: DrawCall_36
+    100026: DrawCall_38_006
+    100028: DrawCall_44_007
+    100030: DrawCall_98_002
+    100032: DrawCall_98_005
+    100034: DrawCall_99_003
+    100036: DrawCall_99_004
+    100038: Lamp
+    100040: Lamp_001
+    100042: Lamp_002
+    100044: Lamp_003
+    100046: //RootNode
+    400000: Camera
+    400002: DrawCall_100_001
+    400004: DrawCall_104_001
+    400006: DrawCall_20_001
+    400008: DrawCall_20_002
+    400010: DrawCall_21
+    400012: DrawCall_215_001
+    400014: DrawCall_21_002
+    400016: DrawCall_27
+    400018: DrawCall_28_001
+    400020: DrawCall_32_001
+    400022: DrawCall_33_005
+    400024: DrawCall_36
+    400026: DrawCall_38_006
+    400028: DrawCall_44_007
+    400030: DrawCall_98_002
+    400032: DrawCall_98_005
+    400034: DrawCall_99_003
+    400036: DrawCall_99_004
+    400038: Lamp
+    400040: Lamp_001
+    400042: Lamp_002
+    400044: Lamp_003
+    400046: //RootNode
+    2300000: DrawCall_100_001
+    2300002: DrawCall_104_001
+    2300004: DrawCall_20_001
+    2300006: DrawCall_20_002
+    2300008: DrawCall_21
+    2300010: DrawCall_215_001
+    2300012: DrawCall_21_002
+    2300014: DrawCall_27
+    2300016: DrawCall_28_001
+    2300018: DrawCall_32_001
+    2300020: DrawCall_33_005
+    2300022: DrawCall_36
+    2300024: DrawCall_38_006
+    2300026: DrawCall_44_007
+    2300028: DrawCall_98_002
+    2300030: DrawCall_98_005
+    2300032: DrawCall_99_003
+    2300034: DrawCall_99_004
+    3300000: DrawCall_100_001
+    3300002: DrawCall_104_001
+    3300004: DrawCall_20_001
+    3300006: DrawCall_20_002
+    3300008: DrawCall_21
+    3300010: DrawCall_215_001
+    3300012: DrawCall_21_002
+    3300014: DrawCall_27
+    3300016: DrawCall_28_001
+    3300018: DrawCall_32_001
+    3300020: DrawCall_33_005
+    3300022: DrawCall_36
+    3300024: DrawCall_38_006
+    3300026: DrawCall_44_007
+    3300028: DrawCall_98_002
+    3300030: DrawCall_98_005
+    3300032: DrawCall_99_003
+    3300034: DrawCall_99_004
+    4300000: DrawCall_32_001
+    4300002: DrawCall_20_002
+    4300004: DrawCall_20_001
+    4300006: DrawCall_27
+    4300008: DrawCall_36
+    4300010: DrawCall_28_001
+    4300012: DrawCall_21_002
+    4300014: DrawCall_98_002
+    4300016: DrawCall_99_003
+    4300018: DrawCall_99_004
+    4300020: DrawCall_100_001
+    4300022: DrawCall_104_001
+    4300024: DrawCall_33_005
+    4300026: DrawCall_44_007
+    4300028: DrawCall_98_005
+    4300030: DrawCall_38_006
+    4300032: DrawCall_215_001
+    4300034: DrawCall_21
+    7400000: Default Take
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationCompression: 1
+    animationRotationError: .5
+    animationPositionError: .5
+    animationScaleError: .5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    splitTangentsAcrossUV: 1
+    normalImportMode: 0
+    tangentImportMode: 1
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: .5
+    foreArmTwist: .5
+    upperLegTwist: .5
+    legTwist: .5
+    armStretch: .0500000007
+    legStretch: .0500000007
+    feetSpacing: 0
+    rootMotionBoneName: 
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
