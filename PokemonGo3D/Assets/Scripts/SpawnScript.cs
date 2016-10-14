@@ -5,18 +5,18 @@ public class SpawnScript : MonoBehaviour
 {
     [SerializeField]
     private GameObject prefab;
-    float time;
-    void Update()
+   [SerializeField] private GameObject[] points;
+    void Start()
     {
-        time += Time.deltaTime;
-        InstantiateSpawner(ref time, prefab);
+        points = GameObject.FindGameObjectsWithTag("SpawnPoint");
+        StartCoroutine(InstantiateSpawner(prefab));
     }
-    void InstantiateSpawner(ref float time, GameObject prefab)
+    IEnumerator InstantiateSpawner(GameObject prefab)
     {
-        if(time > 180)
+        while (true)
         {
-            Instantiate(prefab, new Vector3(Random.Range(-70f, 0.065f), 0, Random.Range(-60f,0)), new Quaternion(0, 0, 0, 0));
-            time = 0;
+            Instantiate(prefab,points[Random.Range(0,points.Length)].transform.position, new Quaternion(0, 0, 0, 0));
+            yield return new WaitForSeconds(30);
         }
     }
 }

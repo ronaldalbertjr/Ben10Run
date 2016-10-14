@@ -5,27 +5,45 @@ public class PlayerScript : MonoBehaviour
 {
 	private Rigidbody rb;
 	private Animator anim;
-	[SerializeField] private float Axisz,Axisy,Speed;
+	[SerializeField] private float Axisz,Axisy,Speed,jumpSpeed;
     private bool animCheck;
+    Vector3 velocityAux;
+    bool capoeira = false;
+   [SerializeField] bool jumping;
+   [SerializeField] AnimationClip jumpAnim,capoeiraAnim;
+   [SerializeField] GameObject sphere;
+   [HideInInspector] public int captureCount;
 	void Start ()
 	{
+        captureCount = 0;
+        rb = GetComponent<Rigidbody>();
 		anim = GetComponent<Animator> ();
 		Speed = 1;
 		Axisy = 180;
-
+        jumping = false;
 	}
 
-	void Update ()
+	void FixedUpdate ()
 	{
-		Axisz = Input.GetAxis ("Vertical");
-        animCheck = Axisz != 0;
-        anim.SetBool("IsWalking", animCheck);
+        if (!capoeira)
+        {
+            Axisz = Input.GetAxis("Vertical");
+            animCheck = Axisz != 0;
+            anim.SetBool("IsWalking", animCheck);
 
-        UpdateWalk();
-        UpdateCapoeira();
-        UpdateRotation();
+            UpdateWalk();
+            //UpdateCapoeira();
+            UpdateRotation();
 
-        transform.Translate (0, 0, Axisz * Speed * Time.deltaTime);
+            velocityAux = transform.forward * Axisz * Speed;
+            velocityAux.y = rb.velocity.y;
+            rb.velocity = velocityAux;
+            if(Input.GetKeyDown(KeyCode.Space) && !jumping)
+            {
+                Jumping();
+                StartCoroutine(jumpFinish());
+            }
+        }
 	}
     
     void UpdateWalk()
@@ -49,17 +67,15 @@ public class PlayerScript : MonoBehaviour
         }
     }
 
-    void UpdateCapoeira()
+   
+  
+    void Jumping()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            anim.SetBool("Capoeira", true);
-        }
-        else if (Input.GetKeyUp(KeyCode.Space))
-        {
-            anim.SetBool("Capoeira", false);
-        }
+        anim.SetTrigger("Jumping");
+        rb.AddForce(Vector3.up * jumpSpeed, ForceMode.Impulse);
+        jumping = true;
     }
+   
     void UpdateRotation()
     {
         if (Input.GetKey(KeyCode.D))
@@ -72,5 +88,31 @@ public class PlayerScript : MonoBehaviour
             transform.rotation = Quaternion.AngleAxis(Axisy, transform.up);
             Axisy -= Speed;
         }
+    }
+    IEnumerator jumpFinish()
+    {
+        yield return new WaitForSeconds(jumpAnim.length);
+        jumping = false;    
+    }
+    void OnTriggerStay (Collider coll)
+    {
+        if (coll.gameObject.tag =="Alien")
+        {
+
+            if (Input.GetKeyDown(KeyCode.Return)&&!capoeira)
+            {
+                anim.SetTrigger("Capoeira");
+                capoeira = true ;
+                StartCoroutine(capoeirafinish(coll.gameObject));
+            }           
+         
+        }
+    }
+    IEnumerator capoeirafinish( GameObject obj)
+    {
+        yield return new WaitForSeconds(capoeiraAnim.length);
+        capoeira = false;
+        Instantiate(sphere, obj.transform.position, Quaternion.identity);
+        Destroy(obj.gameObject);        
     }
 }
