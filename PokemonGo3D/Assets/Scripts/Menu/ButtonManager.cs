@@ -5,7 +5,7 @@ public class ButtonManager : MonoBehaviour
 {
 	private GameObject buttonPlay, buttonTheGame, buttonCredits;
 	private Vector3 speedButton, buttonSettingsPosition, buttonPlayPosition;
-	private bool canGo1, canGo2;
+	private bool canGo1, canGo2, camMove1;
 	private Transform mainCameraPos, camGoTo1, camOriginalPos;
 	public Canvas canvasPrincipal;
 	
@@ -21,11 +21,23 @@ public class ButtonManager : MonoBehaviour
 		speedButton = new Vector3 (6,0,0);
 		canGo1 = true;
 		canGo2 = true;
+		camMove1 = false;
 	}
 
 	void Update()
 	{
 		MoveButton();
+		if(mainCameraPos.position != camGoTo1.position)
+		{
+			if(camMove1)
+			{
+				canvasPrincipal.enabled = false;
+				mainCameraPos.position = Vector3.MoveTowards(mainCameraPos.position, camGoTo1.position, 10);
+				mainCameraPos.Rotate(0, 270, 0);
+			}
+		}
+		else if(mainCameraPos.position == camGoTo1.position)
+			camMove1 = false;
 	}
 	
 	public void PlayGame()
@@ -35,9 +47,7 @@ public class ButtonManager : MonoBehaviour
 	
 	public void TheGame()
 	{
-		canvasPrincipal.enabled = false;
-		mainCameraPos.position = Vector3.MoveTowards(mainCameraPos.position, camGoTo1.position, 10);
-		mainCameraPos.Rotate(0, 270, 0);
+		camMove1 = true;
 	}
 	
 	public void Credits()

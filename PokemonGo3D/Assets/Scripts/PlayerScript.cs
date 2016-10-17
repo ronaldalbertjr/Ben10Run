@@ -9,6 +9,8 @@ public class PlayerScript : MonoBehaviour
     private bool animCheck;
     Vector3 velocityAux;
     bool capoeira = false;
+	private AudioSource camAudio;
+	public AudioClip capoeiraSound, moonWalkSound, normalSound;
    [SerializeField] bool jumping;
    [SerializeField] AnimationClip jumpAnim,capoeiraAnim;
    [SerializeField] GameObject sphere;
@@ -22,6 +24,7 @@ public class PlayerScript : MonoBehaviour
 		Speed = 1;
 		Axisy = 180;
         jumping = false;
+		camAudio = Camera.main.GetComponent<AudioSource> ();
 	}
 
 	void FixedUpdate ()
@@ -64,7 +67,7 @@ public class PlayerScript : MonoBehaviour
         }
         else if (Axisz < 0)
         {
-            anim.SetFloat("Walking2", -1);
+			anim.SetFloat("Walking2", -1);
         }
     }
   
@@ -99,10 +102,11 @@ public class PlayerScript : MonoBehaviour
     {
         if (coll.gameObject.tag == "Alien")
         {
-            if (Input.GetKeyDown(KeyCode.Return)&&!capoeira)
+            if (Input.GetKeyDown(KeyCode.Return) && !capoeira)
             {
                 anim.SetTrigger("Capoeira");
                 capoeira = true;
+				camAudio.PlayOneShot(capoeiraSound);
                 StartCoroutine(capoeirafinish(coll.gameObject));
             }
         }
