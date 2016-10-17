@@ -6,11 +6,13 @@ public class SpawnScript : MonoBehaviour
     [SerializeField]
     private GameObject prefab;
    [SerializeField] private GameObject[] points;
+
     void Start()
     {
         points = GameObject.FindGameObjectsWithTag("SpawnPoint");
         StartCoroutine(InstantiateSpawner(prefab));
     }
+
     IEnumerator InstantiateSpawner(GameObject prefab)
     {
         while (true)

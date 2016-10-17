@@ -13,6 +13,7 @@ public class PlayerScript : MonoBehaviour
    [SerializeField] AnimationClip jumpAnim,capoeiraAnim;
    [SerializeField] GameObject sphere;
    [HideInInspector] public int captureCount;
+
 	void Start ()
 	{
         captureCount = 0;
@@ -66,8 +67,6 @@ public class PlayerScript : MonoBehaviour
             anim.SetFloat("Walking2", -1);
         }
     }
-
-   
   
     void Jumping()
     {
@@ -89,25 +88,26 @@ public class PlayerScript : MonoBehaviour
             Axisy -= Speed;
         }
     }
+
     IEnumerator jumpFinish()
     {
         yield return new WaitForSeconds(jumpAnim.length);
         jumping = false;    
     }
+
     void OnTriggerStay (Collider coll)
     {
-        if (coll.gameObject.tag =="Alien")
+        if (coll.gameObject.tag == "Alien")
         {
-
             if (Input.GetKeyDown(KeyCode.Return)&&!capoeira)
             {
                 anim.SetTrigger("Capoeira");
-                capoeira = true ;
+                capoeira = true;
                 StartCoroutine(capoeirafinish(coll.gameObject));
-            }           
-         
+            }
         }
     }
+
     IEnumerator capoeirafinish( GameObject obj)
     {
         yield return new WaitForSeconds(capoeiraAnim.length);
