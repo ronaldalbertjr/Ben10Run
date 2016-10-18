@@ -22,7 +22,6 @@ public class CaptureBall : MonoBehaviour
         if (follow)
         {
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Time.deltaTime);
-            Debug.Log("he");
         }
 	}
 

@@ -7,10 +7,11 @@ public class PlayerScript : MonoBehaviour
 	private Animator anim;
 	[SerializeField] private float Axisz,Axisy,Speed,jumpSpeed;
     private bool animCheck;
-    Vector3 velocityAux;
-    bool capoeira = false;
+    private Vector3 velocityAux;
+    private bool capoeira = false;
 	private AudioSource camAudio;
 	public AudioClip capoeiraSound, moonWalkSound, normalSound;
+	private bool moonwalk;
    [SerializeField] bool jumping;
    [SerializeField] AnimationClip jumpAnim,capoeiraAnim;
    [SerializeField] GameObject sphere;
@@ -24,6 +25,7 @@ public class PlayerScript : MonoBehaviour
 		Speed = 1;
 		Axisy = 180;
         jumping = false;
+		moonwalk = false;
 		camAudio = Camera.main.GetComponent<AudioSource> ();
 	}
 
@@ -47,6 +49,25 @@ public class PlayerScript : MonoBehaviour
                 Jumping();
                 StartCoroutine(jumpFinish());
             }
+			if(velocityAux == new Vector3(0,0,0))
+				anim.SetFloat("Walking2", 0);
+			if(moonwalk)
+			{
+				if(camAudio.clip != moonWalkSound)
+				{
+					camAudio.clip = moonWalkSound;
+					camAudio.Play();
+				}
+				moonwalk = false;
+			}
+			else if(!moonwalk)
+			{
+				if(camAudio.clip == moonWalkSound)
+				{
+					camAudio.clip = normalSound;
+					camAudio.Play();
+				}
+			}
         }
 	}
     
@@ -68,6 +89,7 @@ public class PlayerScript : MonoBehaviour
         else if (Axisz < 0)
         {
 			anim.SetFloat("Walking2", -1);
+			moonwalk = true;
         }
     }
   

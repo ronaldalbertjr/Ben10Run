@@ -5,22 +5,27 @@ public class SpawnBen10AlienScript : MonoBehaviour
 {
     [SerializeField]
     private GameObject[] aliens;
+	public bool canShowBussola;
+
     void Start()
     {
         StartCoroutine("DestroySpawner");
     }
+
     void OnTriggerEnter(Collider col)
     {
         if(col.tag == "Player")
         {
             Instantiate(aliens[Random.Range(0, aliens.Length)], this.transform.position, this.transform.rotation);
+			canShowBussola = true;
 			Destroy(this.gameObject);
         }
-        if (col.tag=="AlienSpawner")
+        if (col.tag == "AlienSpawner")
         {
             Destroy(col.gameObject);
         }
     }
+
     IEnumerator DestroySpawner()
     {
         yield return new WaitForSeconds(600);
