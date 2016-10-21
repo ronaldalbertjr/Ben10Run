@@ -20,7 +20,7 @@ public class SpawnScript : MonoBehaviour
 	{
 		spawedAlienObj = GameObject.FindGameObjectsWithTag ("Alien");
 		if (spawedAlienObj.Length >= 1)
-			aliensClose.text = "Tem alien nos arrepores";
+			aliensClose.text = "Existe alien nos arredores";
 		else
 			aliensClose.text = "";
 	}

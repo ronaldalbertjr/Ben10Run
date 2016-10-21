@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using UnityEngine.UI;
 public class PlayerScript : MonoBehaviour
 {
 	private Rigidbody rb;
@@ -16,9 +16,10 @@ public class PlayerScript : MonoBehaviour
    [SerializeField] AnimationClip jumpAnim,capoeiraAnim;
    [SerializeField] GameObject sphere;
    [HideInInspector] public int captureCount;
-
+    public int BerimbausNum;
 	void Start ()
 	{
+        BerimbausNum = 0;
         captureCount = 0;
         rb = GetComponent<Rigidbody>();
 		anim = GetComponent<Animator> ();
@@ -73,6 +74,7 @@ public class PlayerScript : MonoBehaviour
     
     void UpdateWalk()
     {
+
         if (Axisz > 0)
         {
             if (Input.GetKey(KeyCode.LeftShift))
@@ -126,10 +128,25 @@ public class PlayerScript : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Return) && !capoeira)
             {
+                if (BerimbausNum > 0)
+                {
+                    anim.SetTrigger("Capoeira");
+                    capoeira = true;
+                    camAudio.PlayOneShot(capoeiraSound);
+                    StartCoroutine(capoeirafinish(coll.gameObject));
+                    BerimbausNum--;
+                }
+                else StartCoroutine(NoBerimbau(coll.gameObject));
+            }
+        }
+        else if (coll.gameObject.tag== "Pokestop")
+        {
+            if (Input.GetKeyDown(KeyCode.Return) && !capoeira)
+            {
                 anim.SetTrigger("Capoeira");
                 capoeira = true;
-				camAudio.PlayOneShot(capoeiraSound);
-                StartCoroutine(capoeirafinish(coll.gameObject));
+                camAudio.PlayOneShot(capoeiraSound);
+                StartCoroutine(Pokestopfinish(coll.gameObject));
             }
         }
     }
@@ -140,5 +157,26 @@ public class PlayerScript : MonoBehaviour
         capoeira = false;
         Instantiate(sphere, obj.transform.position, Quaternion.identity);
         Destroy(obj.gameObject);        
+    }
+    IEnumerator Pokestopfinish(GameObject obj)
+    {
+        yield return new WaitForSeconds(capoeiraAnim.length);
+        capoeira = false;      
+        for (int i = 0;i<3;i++)
+        { 
+           GameObject g = Instantiate(sphere, obj.transform.position, Quaternion.identity) as GameObject;
+           g.GetComponent<CaptureBall>().berimbau = true;
+            yield return new WaitForSeconds(0.5f);
+        }
+        obj.SetActive(false);
+        yield return new WaitForSeconds(300);
+        obj.SetActive(true);
+    }
+    IEnumerator NoBerimbau(GameObject alien)
+    {
+        GameObject.Find("BerimbauText").GetComponent<Text>().text = "Você não possui berimbau para capturar esse alien";
+        yield return new WaitForSeconds(5);
+        GameObject.Find("BerimbauText").GetComponent<Text>().text = "";
+        Destroy(alien, 25);
     }
 }

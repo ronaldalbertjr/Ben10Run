@@ -6,8 +6,8 @@ public class CaptureBall : MonoBehaviour
 {
     Rigidbody rb;
     bool follow;
-    public GameObject player;
-
+    public GameObject player; 
+    public bool berimbau = false;
 	void Start ()
 	{
         player = GameObject.Find("Player");
@@ -19,6 +19,7 @@ public class CaptureBall : MonoBehaviour
 
 	void Update ()
 	{
+        Debug.Log(berimbau);
         if (follow)
         {
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Time.deltaTime);
@@ -37,8 +38,15 @@ public class CaptureBall : MonoBehaviour
     {
         if (coll.gameObject.tag == "Player")
         {
-            player.GetComponent<PlayerScript>().captureCount++;
-            GameObject.Find("Score").GetComponent<Text>().text = player.GetComponent<PlayerScript>().captureCount.ToString();
+            if (!berimbau)
+            {
+                player.GetComponent<PlayerScript>().captureCount++;
+                GameObject.Find("Score").GetComponent<Text>().text = player.GetComponent<PlayerScript>().captureCount.ToString();
+            }
+            else {
+                player.GetComponent<PlayerScript>().BerimbausNum++;
+                GameObject.Find("Berimbaus").GetComponent<Text>().text = player.GetComponent<PlayerScript>().BerimbausNum.ToString();
+            }
             Destroy(gameObject);
         }
     }
