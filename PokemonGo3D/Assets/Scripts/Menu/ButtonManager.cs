@@ -32,12 +32,10 @@ public class ButtonManager : MonoBehaviour
 			if(camMove1)
 			{
 				canvasPrincipal.enabled = false;
-				mainCameraPos.position = Vector3.MoveTowards(mainCameraPos.position, camGoTo1.position, 10);
-				mainCameraPos.Rotate(0, 270, 0);
+				mainCameraPos.position = Vector3.Lerp(mainCameraPos.position, camGoTo1.position, Time.deltaTime);
+                mainCameraPos.rotation = Quaternion.Lerp(mainCameraPos.rotation, Quaternion.Euler(0, 180, 0), Time.deltaTime);
 			}
 		}
-		else if(mainCameraPos.position == camGoTo1.position)
-			camMove1 = false;
 	}
 	
 	public void PlayGame()
@@ -57,10 +55,9 @@ public class ButtonManager : MonoBehaviour
 
 	public void Back2Menu()
 	{
-		mainCameraPos.position = Vector3.MoveTowards(mainCameraPos.position, camOriginalPos.position, 10);
-		mainCameraPos.Rotate(0, 90, 0);
-		canvasPrincipal.enabled = true;
-	}
+        camMove1 = false;
+        StartCoroutine(BackToOriginalPos());
+    }
 	
 	void MoveButton()
 	{
@@ -68,7 +65,7 @@ public class ButtonManager : MonoBehaviour
 		{	
 			buttonPlay.transform.position -= speedButton;
 			if(buttonPlay.transform.position.x  <= (Screen.width / 2))
-				canGo1 = false;
+			    canGo1 = false;
 		}
 		if (canGo2)
 		{
@@ -77,4 +74,16 @@ public class ButtonManager : MonoBehaviour
 				canGo2 = false;
 		}
 	}
+
+    IEnumerator BackToOriginalPos()
+    {
+            while (Vector3.Distance(mainCameraPos.position, camOriginalPos.position) > 0.1f)
+            {
+                mainCameraPos.position = Vector3.Lerp(mainCameraPos.position, camOriginalPos.position, Time.deltaTime);
+                mainCameraPos.rotation = Quaternion.Lerp(mainCameraPos.rotation, Quaternion.Euler(0, 270, 0), Time.deltaTime);
+                yield return new WaitForSeconds(0.0001f);
+            }
+            canvasPrincipal.enabled = true;
+            yield return 0;
+    }
 }
