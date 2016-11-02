@@ -166,6 +166,7 @@ public class PlayerScript : MonoBehaviour
         { 
            GameObject g = Instantiate(sphere, obj.transform.position, Quaternion.identity) as GameObject;
            g.GetComponent<CaptureBall>().berimbau = true;
+            g.GetComponent<CaptureBall>().player = this.gameObject;
             yield return new WaitForSeconds(0.5f);
         }
         obj.SetActive(false);

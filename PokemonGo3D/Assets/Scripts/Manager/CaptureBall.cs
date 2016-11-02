@@ -10,7 +10,6 @@ public class CaptureBall : MonoBehaviour
     public bool berimbau = false;
 	void Start ()
 	{
-        player = GameObject.Find("Player");
         follow = false;
         rb = GetComponent<Rigidbody>();
         rb.AddForce(Vector3.up * 10);
@@ -19,7 +18,6 @@ public class CaptureBall : MonoBehaviour
 
 	void Update ()
 	{
-        Debug.Log(berimbau);
         if (follow)
         {
             transform.position = Vector3.MoveTowards(transform.position, player.transform.position, Time.deltaTime);
