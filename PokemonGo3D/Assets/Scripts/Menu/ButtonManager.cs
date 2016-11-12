@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class ButtonManager : MonoBehaviour
 {
@@ -7,21 +8,22 @@ public class ButtonManager : MonoBehaviour
 	private Vector3 speedButton, buttonSettingsPosition, buttonPlayPosition;
 	private bool canGo1, canGo2, camMove1;
 	private Transform mainCameraPos, camGoTo1, camOriginalPos;
-	public Canvas canvasPrincipal;
+	public Canvas canvasPrincipal, loginCanvas;
 	
 	void Start()
 	{
+        loginCanvas = GameObject.Find("LoginCanvas").GetComponent<Canvas>();
 		buttonPlay = GameObject.Find("PlayButton");
 		buttonTheGame = GameObject.Find("TheGameButton");
-		//buttonCredits = GameObject.FindGameObjectWithTag("ButtonCredits");
 		mainCameraPos = Camera.main.transform;
 		camGoTo1 = GameObject.Find("TheGamePos").transform;
 		camOriginalPos = GameObject.Find("OriginalPos").transform;
-		
+        PlayerPrefs.DeleteAll();
 		speedButton = new Vector3 (6,0,0);
 		canGo1 = true;
 		canGo2 = true;
 		camMove1 = false;
+        loginCanvas.enabled = false;
 	}
 
 	void Update()
@@ -40,7 +42,15 @@ public class ButtonManager : MonoBehaviour
 	
 	public void PlayGame()
 	{
-		Application.LoadLevel("Game");
+        if (!PlayerPrefs.HasKey("Username"))
+        {
+            loginCanvas.enabled = true;
+            canvasPrincipal.enabled = false;
+        }
+        else
+        {
+            SceneManager.LoadScene("Game");
+        }
 	}
 	
 	public void TheGame()

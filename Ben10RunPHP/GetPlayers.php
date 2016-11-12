@@ -1,13 +1,14 @@
 <?php 
-	require 'queries.php';
+	require 'Queries.php';
+	$user = $_POST['nickname'];
 
-	$result = ExecuteQuery("SELECT Nickname FROM player");
+	$result = ExecuteQuery("SELECT Senha FROM player WHERE '$user' = Nickname");
 
 	if(mysqli_num_rows($result) > 0)
 	{
 		while ($row = mysqli_fetch_assoc($result)) 
 		{
-			echo '|'.$row['Nickname'];
+			echo $row['Senha'];
 		}
 	}	
 ?>

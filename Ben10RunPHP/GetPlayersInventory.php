@@ -1,5 +1,5 @@
 <?php
-	require 'queries.php';
+	require 'Queries.php';
 
 	$result = ExecuteQuery("SELECT AlienID FROM caixadecapsulas INNER JOIN player ON (caixadecapsulas.Nickname = player.Nickname) WHERE player.Nickname = 'jupotengy'");
 	echo "Aliens da potengy: ";

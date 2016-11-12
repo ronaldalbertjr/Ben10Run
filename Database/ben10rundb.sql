@@ -1,21 +1,3 @@
--- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
---
--- Host: 127.0.0.1
--- Generation Time: 23-Out-2016 às 16:34
--- Versão do servidor: 10.1.16-MariaDB
--- PHP Version: 5.6.24
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
 --
 -- Database: `ben10rundb`
 --
@@ -129,6 +111,7 @@ CREATE TABLE `player` (
 --
 
 INSERT INTO `player` (`Nickname`, `Email`, `Senha`, `XP`) VALUES
+('eusouoroanld', 'ronaldalbert1609@gmail.com', 'kjkjkjk', 0),
 ('jupotengy', 'jupotengy@gmail.com', 'euamoonogueira', 100),
 ('nathanvmag', 'nathanvmag@gmail.com', 'euamoamari', 250),
 ('ronaldd11', 'ronaldalbert1609@gmail.com', 'ronaldd+', 30);

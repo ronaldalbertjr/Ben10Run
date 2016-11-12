@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Die : MonoBehaviour 
 {
@@ -8,7 +9,7 @@ public class Die : MonoBehaviour
 		if (col.tag == "Player") 
 		{
 			Debug.Log("colliding");
-			Application.LoadLevel("Game");
+            SceneManager.LoadScene("Game");
 		}
 	}
 }
